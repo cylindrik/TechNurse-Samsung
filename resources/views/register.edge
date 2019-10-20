@@ -1,0 +1,230 @@
+<div id="container">
+    <p href="https://imgur.com/3XVWGla"><img src="https://i.imgur.com/3XVWGla.png" title="source: imgur.com" style="width:110px;height:30px;" /></p>
+    <p>Crie sua conta</p>
+    <label for="username">Nome completo:</label>
+    <input type="text" id="username" name="username">
+    <label for="Email">Email:</label>
+    <input type="Email" id="Email" name="Email">
+    <div id="lower">
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password">
+  
+      <head>
+        <style type="text/css">
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans', sans-serif;
+            color: #444;
+            -webkit-font-smoothing: antialiased;
+            background: #f0f0f0;
+          }
+  
+          form {
+            margin: 0 auto;
+            margin-top: 20px;
+          }
+  
+          #container {
+            position: fixed;
+            width: 340px;
+            height: 640px;
+            top: 25%;
+            left: 50%;
+            margin-top: -140px;
+            margin-left: -170px;
+            background: #fff;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            box-shadow: 5px 10px 8px #888888;
+          }
+  
+  
+          label {
+            color: #555;
+            display: inline-block;
+            margin-left: 18px;
+            padding-top: 10px;
+            font-size: 14px;
+          }
+  
+          styledimg {
+            background-image: url(path);
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 20px;
+          }
+  
+          p a {
+            font-size: 11px;
+            color: grey;
+            float: right;
+            margin-top: -13px;
+            margin-right: 20px;
+          }
+  
+          p a:hover {
+            color: #555;
+          }
+  
+  
+  
+          input {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            outline: none;
+          }
+  
+          input[type=ConfirmarSenha],
+          input[type=email],
+          input[type=text],
+          input[type=password] {
+            color: grey;
+            padding-left: 10px;
+            margin: 5px;
+            margin-top: 12px;
+            margin-left: 18px;
+            width: 290px;
+            height: 35px;
+            border: 1px solid #6CF3C1;
+            border-radius: 1px;
+           
+          }
+  
+          #lower {
+            background: white;
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+          }
+  
+          .button {
+            float: right;
+            position: relative;
+            margin-right: 20px;
+            margin-top: 50px;
+            width: 300px;
+            height: 30px;
+            background-color: #6CF3C1;
+            border: 1px solid #6CF3C1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            cursor: pointer;
+  
+          }
+  
+          .button1 {
+            background-color: 6CF3C1;
+            color: black;
+            border: 2px solid #6CF3C1;
+          }
+  
+          .button1:hover {
+            background-color: white;
+            color: black;
+          }
+  
+  
+          input[type=submit] {
+            float: right;
+            position: relative;
+            margin-right: 20px;
+            margin-top: 30px;
+            width: 300px;
+            height: 30px;
+            background-color: #6CF3C1;
+            border: 1px solid #6CF3C1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+            cursor: pointer;
+          }
+  
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 15px;
+            color: #555;
+          }
+  
+          li {
+            padding-left: 16px;
+          }
+  
+          li:before {
+            content: "•";
+            padding-right: 8px;
+            color: #6CF3C1;
+          }
+  
+          p {
+            text-align: center;
+            color: #555
+          }
+  
+          styledimg {
+            background-image: url(technurse-api-example-master\resources\views\imgs\logo.png);
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 20px;
+          }
+        </style>
+      </head>
+      <ul class="a">
+        <li>Pelo menos 6 caracteres</li>
+        <li>Pelo menos 1 letra maiúscula</li>
+        <li>Pelo menos 1 número</li>
+      </ul>
+      <p></p>
+      <label for="ConfirmarSenha">Confirmar Senha:</label>
+      <input type="password" id="ConfirmarSenha" name="ConfirmarSenha">
+      <button class="button button1" onclick="register()">Cadastrar</button>
+  
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      //nome = document.getElementById('nome').value
+      em = document.getElementById('Email').value
+  
+      function register() {
+        axios({
+            method: 'post',
+            url: 'http://localhost:3333/api/auth/register',
+            data: {
+              "email": document.getElementById('Email').value,
+              "password": document.getElementById('password').value
+            }
+          })
+          .then(data => {
+            console.log(data)
+            window.location.href = 'http://localhost:3333/login'
+          })
+          .catch(erro => {
+            alert("Erro ao logar")
+            console.log(erro)
+          })
+      }
+  
+      function validarSenha() {
+        senha = document.getElementById('password').value
+        senha2 = document.getElementById('ConfirmarSenha').value
+        if (senha != senha2) { 
+          alert('Senhas não batem!')
+        } else {
+          if (senha.length < 6) {
+            alert('Senha muito curta!')
+          } else {
+            a = senha.toLowerCase()
+            if (a === senha) {
+              alert('A senha necessita de ao menos uma letra minuscula!')
+            } else {
+              register()
+            }
+          }
+        }
+      }
+    </script>
+  </div>
